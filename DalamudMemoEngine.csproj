@@ -1,0 +1,14 @@
+﻿<Project Sdk="Dalamud.CN.NET.Sdk/14.0.1">
+
+    <PropertyGroup>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <Use_DalamudPackager>false</Use_DalamudPackager>
+        <Version>0.0.1</Version>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="MemoEngine" Version="1.0.7"/>
+    </ItemGroup>
+
+</Project>
