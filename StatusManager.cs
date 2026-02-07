@@ -13,11 +13,11 @@ internal sealed unsafe class StatusManager
     internal void Enable()
     {
         _statusAppliedHook ??=
-            DalamudService.Hook.HookFromSignature<StatusAppliedDelegate>("48 8B C4 55 57 41 54 41 56", OnStatusApplied);
+            DalamudService.Hook.HookFromSignature<StatusAppliedDelegate>("E8 ?? ?? ?? ?? 4C 8B 7C 24 ?? 41 0F B6 C6", OnStatusApplied);
         _statusAppliedHook?.Enable();
 
         _statusRemovedHook ??=
-            DalamudService.Hook.HookFromSignature<StatusRemovedDelegate>("E8 ?? ?? ?? ?? FF C6 48 83 C3 10 83 FE 3C",
+            DalamudService.Hook.HookFromSignature<StatusRemovedDelegate>("E8 ?? ?? ?? ?? 49 8B CE E8 ?? ?? ?? ?? 83 FF 3C",
                 OnStatusRemoved);
         _statusRemovedHook?.Enable();
     }
