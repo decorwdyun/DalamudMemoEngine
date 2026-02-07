@@ -37,6 +37,8 @@ internal sealed unsafe class ActionManager
         float a6)
     {
         var original = _actionStartHook!.Original(player, type, actionId, a4, rotation, a6);
+        if (player == null) return original;
+
         try
         {
             if (player->ObjectKind == ObjectKind.BattleNpc && Context.Lifecycle != EngineState.Idle)
@@ -66,6 +68,8 @@ internal sealed unsafe class ActionManager
     )
     {
         var original = _actionCompletedHook!.Original(player, type, actionId, spellId, a5, a6, rotation, a8, a9, a10);
+        if (player == null) return original;
+
         try
         {
             if (player->ObjectKind == ObjectKind.BattleNpc && Context.Lifecycle != EngineState.Idle)
