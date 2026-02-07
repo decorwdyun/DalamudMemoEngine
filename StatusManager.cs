@@ -35,18 +35,32 @@ internal sealed unsafe class StatusManager
         ulong sourceId, ushort stackCount)
     {
         _statusAppliedHook?.Original(player, statusId, remainingTime, statusParam, sourceId, stackCount);
-        if (Context.Lifecycle == EngineState.Idle) return;
+        try
+        {
+            if (Context.Lifecycle == EngineState.Idle) return;
 
-        Event.Status.RaiseApplied(DalamudService.TimeProvider.Now, (*player)->EntityId, statusId);
+            Event.Status.RaiseApplied(DalamudService.TimeProvider.Now, (*player)->EntityId, statusId);
+        }
+        catch (Exception e)
+        {
+            DalamudService.Log.Error(e, "Failed to process status applied");
+        }
     }
 
     private void OnStatusRemoved(BattleChara** player, ushort statusId, ushort statusParam, ulong sourceId,
         ushort stackCount)
     {
         _statusRemovedHook?.Original(player, statusId, statusParam, sourceId, stackCount);
-        if (Context.Lifecycle == EngineState.Idle) return;
+        try
+        {
+            if (Context.Lifecycle == EngineState.Idle) return;
 
-        Event.Status.RaiseRemoved(DalamudService.TimeProvider.Now, (*player)->EntityId, statusId);
+            Event.Status.RaiseRemoved(DalamudService.TimeProvider.Now, (*player)->EntityId, statusId);
+        }
+        catch (Exception e)
+        {
+            DalamudService.Log.Error(e, "Failed to process status removed");
+        }
     }
 
     private delegate void StatusAppliedDelegate(BattleChara** player, ushort statusId, float remainingTime,
