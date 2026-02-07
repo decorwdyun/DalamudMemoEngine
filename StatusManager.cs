@@ -35,6 +35,8 @@ internal sealed unsafe class StatusManager
         ulong sourceId, ushort stackCount)
     {
         _statusAppliedHook?.Original(player, statusId, remainingTime, statusParam, sourceId, stackCount);
+        if (statusId == 0 || player == null || *player == null) return;
+        
         try
         {
             if (Context.Lifecycle == EngineState.Idle) return;
@@ -51,6 +53,8 @@ internal sealed unsafe class StatusManager
         ushort stackCount)
     {
         _statusRemovedHook?.Original(player, statusId, statusParam, sourceId, stackCount);
+        if (statusId == 0 || player == null || *player == null) return;
+
         try
         {
             if (Context.Lifecycle == EngineState.Idle) return;
